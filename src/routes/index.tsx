@@ -527,7 +527,7 @@ function Home() {
                         style={{ animationDelay: `${Math.min(i * 80, 400)}ms` }}
                       >
                         {item.type === "shopify" ? (
-                          <ProductCard product={item.product} />
+                          <ProductCard product={item.product} showBadge={true} />
                         ) : (
                           <AdminProductCard product={item.product} />
                         )}
@@ -552,18 +552,18 @@ function Home() {
             className="mx-auto h-[200px] w-[200px] rounded-full object-cover shadow-lg transition-transform duration-700 hover:scale-105 md:h-[250px] md:w-[250px]"
           />
           <div className="mt-10">
-            <span className="eyebrow text-accent">Sobre nos</span>
+            <span className="eyebrow text-accent">Sobre nós</span>
             <h2 className="mt-3 font-display text-3xl leading-tight md:text-4xl">
               ✨ Muito mais que beleza.<br />
-              <span className="text-accent">Seu brilho, sua evolucao.</span>
+              <span className="text-accent">Seu brilho, sua evolução.</span>
             </h2>
             <p className="mt-6 text-muted-foreground leading-relaxed">
-              A Glow Up Store nasceu com um proposito: transformar o autocuidado em uma
-              experiencia de confianca, beleza e bem-estar.
+              A Glow Up Store nasceu com um propósito: transformar o autocuidado em uma
+              experiência de confiança, beleza e bem-estar.
             </p>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              Acreditamos que beleza nao e sobre seguir padroes. E sobre se cuidar, se
-              valorizar e se sentir bem com quem voce e. 💗
+              Acreditamos que beleza não é sobre seguir padrões. É sobre se cuidar, se
+              valorizar e se sentir bem com quem você é. 💗
             </p>
 
             <div className="mt-8 space-y-5">

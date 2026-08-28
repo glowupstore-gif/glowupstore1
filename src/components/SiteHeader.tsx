@@ -7,7 +7,7 @@ export type SectionId = "destaques" | "categorias" | "sobrenos";
 const NAV = [
   { label: "Destaques", id: "destaques" as const },
   { label: "Categorias", id: "categorias" as const },
-  { label: "Sobre nos", id: "sobrenos" as const },
+  { label: "Sobre nós", id: "sobrenos" as const },
 ];
 
 interface SiteHeaderProps {

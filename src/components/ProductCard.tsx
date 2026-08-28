@@ -6,7 +6,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { whatsappLink } from "@/lib/site";
 import { toast } from "sonner";
 
-export function ProductCard({ product }: { product: ShopifyProduct }) {
+export function ProductCard({ product, showBadge }: { product: ShopifyProduct; showBadge?: boolean }) {
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
@@ -56,7 +56,12 @@ export function ProductCard({ product }: { product: ShopifyProduct }) {
           </div>
         )}
 
-        {hasDiscount && (
+        {showBadge && (
+          <span className="absolute left-2 top-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
+            🔥 Mais vendido
+          </span>
+        )}
+        {hasDiscount && !showBadge && (
           <span className="absolute left-2 top-2 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
             -{Math.round(((parseFloat(compareAt.amount) - parseFloat(price.amount)) / parseFloat(compareAt.amount)) * 100)}%
           </span>
