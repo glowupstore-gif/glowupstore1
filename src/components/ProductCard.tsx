@@ -6,7 +6,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { whatsappLink } from "@/lib/site";
 import { toast } from "sonner";
 
-export function ProductCard({ product, showBadge }: { product: ShopifyProduct; showBadge?: boolean }) {
+export function ProductCard({ product, badgeType }: { product: ShopifyProduct; badgeType?: "destaque" | "oferta" }) {
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
@@ -55,7 +55,7 @@ export function ProductCard({ product, showBadge }: { product: ShopifyProduct; s
         )}
 
         <span className="absolute left-2 top-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-          🔥 Mais vendido
+          {badgeType === "oferta" ? "🏷️ Oferta" : "🔥 Mais vendido"}
         </span>
         <span className="absolute right-2 top-2 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
           -60%
@@ -102,6 +102,7 @@ export function ProductCard({ product, showBadge }: { product: ShopifyProduct; s
               </>
             )}
           </Button>
+          <p className="mt-1.5 text-center text-[10px] text-muted-foreground">🔒 Compra segura</p>
         </div>
       </div>
     </article>

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { whatsappLink } from "@/lib/site";
 import type { AdminProduct } from "@/stores/adminStore";
 
-export function AdminProductCard({ product, showBadge }: { product: AdminProduct; showBadge?: boolean }) {
+export function AdminProductCard({ product, badgeType }: { product: AdminProduct; badgeType?: "destaque" | "oferta" }) {
   const parsePrice = (val: string) => {
     return parseFloat(val.replace(/[^\d.,]/g, "").replace(",", "."));
   };
@@ -24,7 +24,7 @@ export function AdminProductCard({ product, showBadge }: { product: AdminProduct
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1">
       <div className="relative block aspect-[4/5] overflow-hidden bg-secondary">
         <span className="absolute left-2 top-2 z-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-          🔥 Mais vendido
+          {badgeType === "oferta" ? "🏷️ Oferta" : "🔥 Mais vendido"}
         </span>
         <span className="absolute right-2 top-2 z-10 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
           -60%
@@ -77,6 +77,7 @@ export function AdminProductCard({ product, showBadge }: { product: AdminProduct
               Quero o meu
             </a>
           </Button>
+          <p className="mt-1.5 text-center text-[10px] text-muted-foreground">🔒 Compra segura</p>
         </div>
       </div>
     </article>

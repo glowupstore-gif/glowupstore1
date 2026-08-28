@@ -430,7 +430,7 @@ function Home() {
                   className="animate-fade-in-up"
                   style={{ animationDelay: `${Math.min(i * 80, 400)}ms` }}
                 >
-                  <AdminProductCard product={product} />
+                  <AdminProductCard product={product} badgeType="destaque" />
                 </div>
               ))}
             </div>
@@ -527,9 +527,9 @@ function Home() {
                         style={{ animationDelay: `${Math.min(i * 80, 400)}ms` }}
                       >
                         {item.type === "shopify" ? (
-                          <ProductCard product={item.product} showBadge={true} />
+                          <ProductCard product={item.product} badgeType="oferta" />
                         ) : (
-                          <AdminProductCard product={item.product} showBadge={true} />
+                          <AdminProductCard product={item.product} badgeType="oferta" />
                         )}
                       </div>
                     ))}
