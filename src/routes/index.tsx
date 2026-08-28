@@ -400,7 +400,7 @@ function Home() {
               {visible.map((product, i) => (
                 <div
                   key={product.id}
-                  className="animate-fade-in-up"
+                  className={`animate-fade-in-up ${i >= 2 ? "hidden md:block" : ""}`}
                   style={{ animationDelay: `${Math.min(i * 80, 400)}ms` }}
                 >
                   <AdminProductCard product={product} />
