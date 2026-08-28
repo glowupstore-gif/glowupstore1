@@ -267,7 +267,7 @@ function Home() {
       <SiteHeader activeSection={activeSection} onNavigate={handleNavigate} />
 
       {/* HERO */}
-      <section className="bg-sand">
+      <section className="bg-background">
         <div className="relative mx-auto max-w-7xl">
           <div className="relative h-[500px] overflow-hidden rounded-lg md:h-[700px]">
             {banners.map((banner, i) => {
@@ -333,7 +333,7 @@ function Home() {
       </section>
 
       {/* BENEFICIOS */}
-      <section className="border-b border-border bg-sand overflow-hidden">
+      <section className="border-b border-border bg-background overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 md:px-8 overflow-hidden">
           <div className="flex animate-marquee whitespace-nowrap py-10">
             {[...BENEFITS, ...BENEFITS, ...BENEFITS].map(({ icon: Icon, title, text }, i) => (
@@ -356,7 +356,7 @@ function Home() {
 
       {/* OFERTAS - sempre visivel abaixo do hero */}
       {offers.map((offer) => (
-        <section key={offer.id} className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20">
+        <section key={offer.id} className="mx-auto max-w-7xl bg-background px-4 py-16 md:px-8 md:py-20">
             <div className="relative overflow-hidden rounded-2xl">
             <img
               src={offer.image}
@@ -398,7 +398,7 @@ function Home() {
         const visible = featured.slice(start, start + featuredPerPage);
 
         return (
-          <section id="destaques" className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
+          <section id="destaques" className="mx-auto max-w-7xl bg-background px-4 py-12 md:px-8 md:py-16">
             <div className="flex items-end justify-between gap-4">
               <div>
                 <span className="eyebrow text-accent">Destaques</span>
@@ -439,7 +439,7 @@ function Home() {
       })()}
 
       {/* CATEGORIAS */}
-      <section id="categorias" className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20">
+      <section id="categorias" className="mx-auto max-w-7xl bg-background px-4 py-16 md:px-8 md:py-20">
           <div className="flex items-end justify-between gap-4">
             <div>
               <span className="eyebrow text-accent">Categorias</span>
@@ -541,7 +541,7 @@ function Home() {
         </section>
 
       {/* SOBRE A GLOW UP */}
-      <section id="sobrenos" className="bg-sand border-t border-border">
+      <section id="sobrenos" className="bg-background border-t border-border">
         <div className="mx-auto max-w-3xl px-4 py-16 text-center md:px-8 md:py-24">
           <img
             src={logo}
@@ -600,7 +600,7 @@ function Home() {
       </section>
 
       {/* AVALIACOES */}
-      <section id="avaliacoes" className="mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20">
+      <section id="avaliacoes" className="mx-auto max-w-7xl bg-background px-4 py-16 md:px-8 md:py-20">
         <span className="eyebrow text-accent">Avaliacoes</span>
         <h2 className="mt-2 font-display text-4xl md:text-5xl">O que dizem as clientes</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
