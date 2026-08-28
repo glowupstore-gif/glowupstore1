@@ -365,7 +365,7 @@ function Home() {
       {/* DESTAQUES */}
       {(() => {
         const featured = adminProducts.filter((p) => p.available && p.featured);
-        const featuredPerPage = 3;
+        const featuredPerPage = 4;
         const totalPages = Math.ceil(featured.length / featuredPerPage);
         const start = featuredPage * featuredPerPage;
         const visible = featured.slice(start, start + featuredPerPage);
@@ -396,7 +396,7 @@ function Home() {
                 </div>
               )}
             </div>
-            <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3">
+            <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
               {visible.map((product, i) => (
                 <div
                   key={product.id}
