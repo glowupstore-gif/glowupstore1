@@ -452,7 +452,7 @@ function Home() {
               return (
                 <button
                   key={cat.query}
-                  onClick={() => setActiveCategory(active ? null : cat.query)}
+                  onClick={() => { clearHighlight(); setActiveCategory(active ? null : cat.query); }}
                   className={`group flex flex-col items-center gap-2 rounded-2xl border-2 p-3 transition-all duration-200 ${
                     active
                       ? "border-primary bg-primary/10 shadow-md"
