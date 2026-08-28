@@ -16,6 +16,9 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1">
       <div className="relative block aspect-[4/5] overflow-hidden bg-secondary">
+        <span className="absolute left-2 top-2 z-10 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
+          -60%
+        </span>
         {product.image ? (
           <img
             src={product.image}
@@ -45,9 +48,12 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
           <span className="text-[11px] text-muted-foreground">({reviews})</span>
         </div>
 
-        <div className="mt-1.5">
+        <div className="mt-1.5 flex items-baseline gap-2">
           <span className="text-base font-bold text-primary">
             {formatPrice(product.price)}
+          </span>
+          <span className="text-[11px] text-muted-foreground line-through">
+            {formatPrice((parseFloat(product.price.replace(/[^\d,]/g, "").replace(",", ".")) * 1.6).toString())}
           </span>
         </div>
 
@@ -58,7 +64,7 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
           >
             <a href={buyHref} target="_blank" rel="noopener noreferrer">
               <ShoppingBag className="mr-2 h-4 w-4" />
-              Comprar
+              Quero o meu
             </a>
           </Button>
         </div>
