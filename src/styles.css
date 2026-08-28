@@ -64,59 +64,59 @@
 :root {
   --radius: 0.25rem;
 
-  /* 70% branco — fundo principal clean e elegante */
-  --background: oklch(0.99 0.003 95);
+  /* fundo rosa claro — todo o site */
+  --background: oklch(0.95 0.025 350);
   --foreground: oklch(0.18 0.014 20);
-  --card: oklch(1 0 0);
+  --card: oklch(0.97 0.02 350);
   --card-foreground: oklch(0.18 0.014 20);
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.97 0.02 350);
   --popover-foreground: oklch(0.18 0.014 20);
 
-  /* rosa forte — botões, ofertas e detalhes importantes (30% rosa) */
-  --primary: oklch(0.58 0.14 15);
-  --primary-foreground: oklch(0.99 0.003 95);
+  /* rosa pink choque — botões e destaques */
+  --primary: oklch(0.6 0.22 340);
+  --primary-foreground: oklch(1 0 0);
 
-  /* rosa claro — fundos de seções e superfícies suaves */
-  --secondary: oklch(0.94 0.025 15);
-  --secondary-foreground: oklch(0.35 0.06 15);
+  /* rosa palido — superfícies e seções */
+  --secondary: oklch(0.92 0.035 350);
+  --secondary-foreground: oklch(0.3 0.05 350);
 
-  --muted: oklch(0.96 0.012 15);
-  --muted-foreground: oklch(0.45 0.03 20);
+  --muted: oklch(0.93 0.025 350);
+  --muted-foreground: oklch(0.45 0.03 350);
 
-  /* rosa médio — acentos e elementos interativos */
-  --accent: oklch(0.62 0.12 15);
-  --accent-foreground: oklch(0.99 0.003 95);
+  /* rosa choque — acentos e interativos */
+  --accent: oklch(0.6 0.22 340);
+  --accent-foreground: oklch(1 0 0);
 
   --destructive: oklch(0.52 0.19 27);
-  --destructive-foreground: oklch(0.99 0.003 95);
+  --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(0.92 0.015 15);
-  --input: oklch(0.92 0.015 15);
-  --ring: oklch(0.58 0.14 15);
+  --border: oklch(0.88 0.03 350);
+  --input: oklch(0.88 0.03 350);
+  --ring: oklch(0.6 0.22 340);
 
   --ink: oklch(0.15 0.012 20);
   --ink-foreground: oklch(0.98 0.004 95);
-  --rose: oklch(0.58 0.14 15);
-  --rose-soft: oklch(0.92 0.03 15);
+  --rose: oklch(0.6 0.22 340);
+  --rose-soft: oklch(0.9 0.04 350);
   --wine: oklch(0.34 0.105 17);
-  --sand: oklch(0.95 0.015 80);
+  --sand: oklch(0.93 0.03 350);
 
   --whatsapp: oklch(0.62 0.16 148);
-  --whatsapp-foreground: oklch(0.99 0.005 90);
+  --whatsapp-foreground: oklch(1 0 0);
 
-  --sidebar: oklch(0.98 0.005 95);
+  --sidebar: oklch(0.96 0.025 350);
   --sidebar-foreground: oklch(0.18 0.014 20);
-  --sidebar-primary: oklch(0.58 0.14 15);
-  --sidebar-primary-foreground: oklch(0.99 0.003 95);
-  --sidebar-accent: oklch(0.94 0.025 15);
-  --sidebar-accent-foreground: oklch(0.35 0.06 15);
-  --sidebar-border: oklch(0.92 0.015 15);
-  --sidebar-ring: oklch(0.58 0.14 15);
+  --sidebar-primary: oklch(0.6 0.22 340);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.92 0.035 350);
+  --sidebar-accent-foreground: oklch(0.3 0.05 350);
+  --sidebar-border: oklch(0.88 0.03 350);
+  --sidebar-ring: oklch(0.6 0.22 340);
 
   --gradient-wine: linear-gradient(135deg, var(--ink) 0%, var(--wine) 60%, var(--rose) 130%);
   --gradient-rose: linear-gradient(120deg, var(--rose) 0%, var(--primary) 100%);
   --shadow-luxe: 0 24px 60px -30px color-mix(in oklab, var(--rose) 40%, transparent);
-  --shadow-card: 0 1px 3px color-mix(in oklab, var(--ink) 5%, transparent);
+  --shadow-card: 0 1px 3px color-mix(in oklch(0.6 0.22 340) 8%, transparent);
 }
 
 .dark {
