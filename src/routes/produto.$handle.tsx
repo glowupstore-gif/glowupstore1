@@ -138,7 +138,7 @@ function ProductPage() {
                           node.priceRange.minVariantPrice.currencyCode,
                         )}
                   </p>
-                  <p className="mt-4 text-sm text-muted-foreground line-through">
+                  <p className="mt-4 text-base font-medium text-red-400 line-through decoration-2">
                     {variant
                       ? formatPrice((parseFloat(variant.price.amount) * 1.6).toFixed(2), variant.price.currencyCode)
                       : formatPrice(

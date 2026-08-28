@@ -59,7 +59,7 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
           <span className="text-base font-bold text-primary">
             {formatPrice(product.price)}
           </span>
-          <span className="text-[11px] text-muted-foreground line-through">
+          <span className="text-sm font-medium text-red-400 line-through decoration-2">
             R$ {originalPrice}
           </span>
         </div>
