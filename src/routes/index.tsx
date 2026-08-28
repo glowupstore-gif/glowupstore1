@@ -529,7 +529,7 @@ function Home() {
                         {item.type === "shopify" ? (
                           <ProductCard product={item.product} showBadge={true} />
                         ) : (
-                          <AdminProductCard product={item.product} />
+                          <AdminProductCard product={item.product} showBadge={true} />
                         )}
                       </div>
                     ))}
