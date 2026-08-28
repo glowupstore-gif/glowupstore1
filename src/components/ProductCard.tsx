@@ -54,16 +54,12 @@ export function ProductCard({ product, showBadge }: { product: ShopifyProduct; s
           </div>
         )}
 
-        {showBadge && (
-          <span className="absolute left-2 top-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-            🔥 Mais vendido
-          </span>
-        )}
-        {!showBadge && (
-          <span className="absolute left-2 top-2 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-            -60%
-          </span>
-        )}
+        <span className="absolute left-2 top-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
+          🔥 Mais vendido
+        </span>
+        <span className="absolute right-2 top-2 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
+          -60%
+        </span>
       </Link>
 
       <div className="flex flex-1 flex-col p-3">

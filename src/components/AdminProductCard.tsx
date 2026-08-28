@@ -23,15 +23,12 @@ export function AdminProductCard({ product, showBadge }: { product: AdminProduct
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1">
       <div className="relative block aspect-[4/5] overflow-hidden bg-secondary">
-        {showBadge ? (
-          <span className="absolute left-2 top-2 z-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-            🔥 Mais vendido
-          </span>
-        ) : (
-          <span className="absolute left-2 top-2 z-10 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-            -60%
-          </span>
-        )}
+        <span className="absolute left-2 top-2 z-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
+          🔥 Mais vendido
+        </span>
+        <span className="absolute right-2 top-2 z-10 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
+          -60%
+        </span>
         {product.image ? (
           <img
             src={product.image}
