@@ -55,7 +55,7 @@ const BENEFITS = [
   { icon: Truck, title: "Envio rapido", text: "Para todo o Brasil" },
   { icon: Star, title: "Atendimento humano", text: "Direto no WhatsApp" },
   { icon: CreditCard, title: "Parcelamento", text: "Ate 6x sem juros" },
-  { icon: RotateCcw, title: "Troca garantida", text: "30 dias para devolver" },
+  { icon: RotateCcw, title: "Troca garantida", text: "7 dias para devolver" },
   { icon: Heart, title: "Produtos selecionados", text: "So o melhor pra voce" },
   { icon: Package, title: "Embalagem segura", text: "Chega intacto ate voce" },
   { icon: Headphones, title: "Suporte dedicado", text: "Tiramos todas suas duvidas" },

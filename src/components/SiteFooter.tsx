@@ -136,7 +136,7 @@ export function SiteFooter() {
             </svg>
             <div>
               <p className="text-[11px] font-bold text-ink-foreground/80">Compra Protegida</p>
-              <p className="text-[9px] text-ink-foreground/50">Troca em 30 dias</p>
+              <p className="text-[9px] text-ink-foreground/50">Troca em 7 dias</p>
             </div>
           </div>
 
