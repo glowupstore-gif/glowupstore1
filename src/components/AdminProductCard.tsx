@@ -4,11 +4,18 @@ import { whatsappLink } from "@/lib/site";
 import type { AdminProduct } from "@/stores/adminStore";
 
 export function AdminProductCard({ product }: { product: AdminProduct }) {
+  const parsePrice = (val: string) => {
+    return parseFloat(val.replace(/[^\d.,]/g, "").replace(",", "."));
+  };
+
   const formatPrice = (val: string) => {
-    const num = parseFloat(val.replace(/[^\d,]/g, "").replace(",", "."));
+    const num = parsePrice(val);
     if (isNaN(num)) return val;
     return num.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   };
+
+  const priceNum = parsePrice(product.price);
+  const originalPrice = (priceNum * 1.6).toFixed(2).replace(".", ",");
 
   const buyHref = product.buyLink || whatsappLink(`Oi! Tenho interesse no produto "${product.title}"`);
   const reviews = Math.floor(Math.random() * 500) + 50;
@@ -53,7 +60,7 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
             {formatPrice(product.price)}
           </span>
           <span className="text-[11px] text-muted-foreground line-through">
-            {formatPrice((parseFloat(product.price.replace(/[^\d,]/g, "").replace(",", ".")) * 1.6).toString())}
+            R$ {originalPrice}
           </span>
         </div>
 
