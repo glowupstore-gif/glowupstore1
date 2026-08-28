@@ -519,7 +519,11 @@ function Home() {
                       <div
                         key={item.id}
                         id={`highlight-${item.id}`}
-                        className="animate-fade-in-up"
+                        className={`animate-fade-in-up rounded-2xl transition-all duration-300 ${
+                          highlightedProductId === item.id
+                            ? "ring-4 ring-primary scale-[1.05] z-10 shadow-lg"
+                            : ""
+                        }`}
                         style={{ animationDelay: `${Math.min(i * 80, 400)}ms` }}
                       >
                         {item.type === "shopify" ? (
