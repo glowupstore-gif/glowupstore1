@@ -365,9 +365,10 @@ function Home() {
       {/* DESTAQUES */}
       {(() => {
         const featured = adminProducts.filter((p) => p.available && p.featured);
-        const totalPages = Math.ceil(featured.length / ITEMS_PER_ROW);
-        const start = featuredPage * ITEMS_PER_ROW;
-        const visible = featured.slice(start, start + ITEMS_PER_ROW);
+        const featuredPerPage = 3;
+        const totalPages = Math.ceil(featured.length / featuredPerPage);
+        const start = featuredPage * featuredPerPage;
+        const visible = featured.slice(start, start + featuredPerPage);
 
         return (
           <section id="destaques" className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
