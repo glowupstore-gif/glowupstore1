@@ -233,6 +233,31 @@ function Home() {
   }, [activeCategory]);
 
   useEffect(() => {
+    if (!highlightedProductId || !activeCategory) return;
+    const term = activeCategory.toLowerCase();
+    const shopifyFiltered = products.filter((p) => {
+      const haystack = [
+        p.node.title,
+        p.node.productType ?? "",
+        p.node.description,
+        ...(p.node.tags ?? []),
+      ].join(" ").toLowerCase();
+      return haystack.includes(term);
+    });
+    const adminFiltered = adminProducts
+      .filter((p) => p.available && p.category === activeCategory);
+    const all = [
+      ...shopifyFiltered.map((p) => p.node.id),
+      ...adminFiltered.map((p) => p.id),
+    ];
+    const idx = all.indexOf(highlightedProductId);
+    if (idx >= 0) {
+      const targetPage = Math.floor(idx / ITEMS_PER_ROW);
+      setCategoryPage(targetPage);
+    }
+  }, [highlightedProductId, activeCategory, products, adminProducts]);
+
+  useEffect(() => {
     const el = document.getElementById(activeSection);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [activeSection]);
@@ -493,6 +518,7 @@ function Home() {
                     {visible.map((item, i) => (
                       <div
                         key={item.id}
+                        id={`highlight-${item.id}`}
                         className="animate-fade-in-up"
                         style={{ animationDelay: `${Math.min(i * 80, 400)}ms` }}
                       >
