@@ -151,10 +151,18 @@ function Home() {
     const custom = rawBanners.filter((b) => !HERO_SLIDES.some((s) => s.id === b.id));
     const defaults = HERO_SLIDES.map((s) => {
       const saved = rawBanners.find((b) => b.id === s.id);
-      if (!saved) return null;
-      if (!saved.image) return null;
-      return saved;
-    }).filter(Boolean) as typeof rawBanners;
+      const hasValidImage =
+        saved?.image &&
+        (saved.image.startsWith("http") || saved.image.startsWith("data:"));
+      return {
+        id: s.id,
+        image: hasValidImage ? saved.image : s.src,
+        alt: s.alt,
+        link: saved?.link ?? "",
+        productId: saved?.productId,
+        createdAt: saved?.createdAt ?? 0,
+      };
+    });
     return [...defaults, ...custom];
   }, [rawBanners]);
 

@@ -1,5 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import type { Offer } from "@/stores/adminStore";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 const REPO = "cggoncalves2000-commits/glow-up-boutique";
 const FILE_PATH = "public/offers.json";
@@ -50,13 +52,26 @@ export const fetchOffersGitHub = createServerFn({ method: "GET" })
   .handler(async (): Promise<Offer[]> => {
     try {
       const content = await getContent();
-      if (!content) return [];
+      if (!content) {
+        return readLocalOffers();
+      }
       const parsed = JSON.parse(content);
       return Array.isArray(parsed) ? parsed : [];
     } catch {
-      return [];
+      return readLocalOffers();
     }
   });
+
+function readLocalOffers(): Offer[] {
+  try {
+    const filePath = join(process.cwd(), "public", "offers.json");
+    const raw = readFileSync(filePath, "utf-8");
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
 
 export const saveOffersGitHub = createServerFn({ method: "POST" })
   .validator((offers: Offer[]) => offers)

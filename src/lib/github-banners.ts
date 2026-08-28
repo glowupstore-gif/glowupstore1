@@ -1,5 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import type { Banner } from "@/stores/adminStore";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 const REPO = "cggoncalves2000-commits/glow-up-boutique";
 const FILE_PATH = "public/banners.json";
@@ -50,13 +52,26 @@ export const fetchBannersGitHub = createServerFn({ method: "GET" })
   .handler(async (): Promise<Banner[]> => {
     try {
       const content = await getContent();
-      if (!content) return [];
+      if (!content) {
+        return readLocalBanners();
+      }
       const parsed = JSON.parse(content);
       return Array.isArray(parsed) ? parsed : [];
     } catch {
-      return [];
+      return readLocalBanners();
     }
   });
+
+function readLocalBanners(): Banner[] {
+  try {
+    const filePath = join(process.cwd(), "public", "banners.json");
+    const raw = readFileSync(filePath, "utf-8");
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
 
 export const saveBannersGitHub = createServerFn({ method: "POST" })
   .validator((banners: Banner[]) => banners)

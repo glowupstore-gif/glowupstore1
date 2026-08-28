@@ -1,5 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import type { AdminProduct } from "@/stores/adminStore";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 const REPO = "cggoncalves2000-commits/glow-up-boutique";
 const FILE_PATH = "public/products.json";
@@ -51,13 +53,26 @@ export const fetchProductsGitHub = createServerFn({ method: "GET" })
   .handler(async (): Promise<AdminProduct[]> => {
     try {
       const content = await getContent();
-      if (!content) return [];
+      if (!content) {
+        return readLocalProducts();
+      }
       const parsed = JSON.parse(content);
       return Array.isArray(parsed) ? parsed : [];
     } catch {
-      return [];
+      return readLocalProducts();
     }
   });
+
+function readLocalProducts(): AdminProduct[] {
+  try {
+    const filePath = join(process.cwd(), "public", "products.json");
+    const raw = readFileSync(filePath, "utf-8");
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
 
 export const saveProductsGitHub = createServerFn({ method: "POST" })
   .validator((products: AdminProduct[]) => products)
