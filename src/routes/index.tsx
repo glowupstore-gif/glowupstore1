@@ -15,6 +15,7 @@ import { fetchProducts } from "@/lib/shopify";
 import { getFeaturedIdsFromLocal } from "@/stores/adminStore";
 import { CATEGORIES } from "@/lib/site";
 import { useCartSync } from "@/hooks/useCartSync";
+import { useIsMobile } from "@/hooks/use-mobile";
 import carrosel1 from "@/assets/carrosel 1.jpeg";
 import carrosel2 from "@/assets/carrosel 2.jpeg";
 import carrosel3 from "@/assets/carrosel 3.jpeg";
@@ -107,6 +108,7 @@ const TESTIMONIALS = [
 
 function Home() {
   useCartSync();
+  const isMobile = useIsMobile();
   const [activeCategory, setActiveCategory] = useState<string | null>(CATEGORIES[0].query);
   const [activeSection, setActiveSection] = useState<SectionId>("destaques");
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -365,7 +367,7 @@ function Home() {
       {/* DESTAQUES */}
       {(() => {
         const featured = adminProducts.filter((p) => p.available && p.featured);
-        const featuredPerPage = 4;
+        const featuredPerPage = isMobile ? 2 : 4;
         const totalPages = Math.ceil(featured.length / featuredPerPage);
         const start = featuredPage * featuredPerPage;
         const visible = featured.slice(start, start + featuredPerPage);
@@ -400,7 +402,7 @@ function Home() {
               {visible.map((product, i) => (
                 <div
                   key={product.id}
-                  className={`animate-fade-in-up ${i >= 2 ? "hidden md:block" : ""}`}
+                  className="animate-fade-in-up"
                   style={{ animationDelay: `${Math.min(i * 80, 400)}ms` }}
                 >
                   <AdminProductCard product={product} />
