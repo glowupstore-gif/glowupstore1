@@ -106,7 +106,7 @@ export function ProductCard({ product, showBadge }: { product: ShopifyProduct; s
             ) : (
               <>
                 <ShoppingBag className="mr-2 h-4 w-4" />
-                Comprar
+                Quero o meu
               </>
             )}
           </Button>
