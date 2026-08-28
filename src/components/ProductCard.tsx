@@ -14,9 +14,7 @@ export function ProductCard({ product, showBadge }: { product: ShopifyProduct; s
   const selectedVariant = node.variants.edges[0]?.node;
   const image = node.images.edges[0]?.node;
   const price = node.priceRange.minVariantPrice;
-  const compareAt = node.compareAtPriceRange?.minVariantPrice;
-  const hasDiscount =
-    compareAt && parseFloat(compareAt.amount) > parseFloat(price.amount) ? compareAt : null;
+  const originalPrice = (parseFloat(price.amount) * 1.6).toFixed(2);
 
   const reviews = Math.floor(Math.random() * 500) + 50;
 
@@ -61,9 +59,9 @@ export function ProductCard({ product, showBadge }: { product: ShopifyProduct; s
             🔥 Mais vendido
           </span>
         )}
-        {hasDiscount && !showBadge && (
+        {!showBadge && (
           <span className="absolute left-2 top-2 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-            -{Math.round(((parseFloat(compareAt.amount) - parseFloat(price.amount)) / parseFloat(compareAt.amount)) * 100)}%
+            -60%
           </span>
         )}
       </Link>
@@ -88,11 +86,9 @@ export function ProductCard({ product, showBadge }: { product: ShopifyProduct; s
           <span className="text-base font-bold text-primary">
             {formatPrice(price.amount, price.currencyCode)}
           </span>
-          {hasDiscount && (
-            <span className="text-[11px] text-muted-foreground line-through">
-              {formatPrice(hasDiscount.amount, hasDiscount.currencyCode)}
-            </span>
-          )}
+          <span className="text-[11px] text-muted-foreground line-through">
+            {formatPrice(originalPrice, price.currencyCode)}
+          </span>
         </div>
 
         <div className="mt-auto pt-3">

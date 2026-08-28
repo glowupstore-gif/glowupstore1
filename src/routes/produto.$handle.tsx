@@ -129,14 +129,27 @@ function ProductPage() {
                   <span className="eyebrow text-accent">{node.productType}</span>
                 )}
                 <h1 className="mt-2 font-display text-4xl md:text-5xl">{node.title}</h1>
-                <p className="mt-4 text-2xl font-medium text-primary">
-                  {variant
-                    ? formatPrice(variant.price.amount, variant.price.currencyCode)
-                    : formatPrice(
-                        node.priceRange.minVariantPrice.amount,
-                        node.priceRange.minVariantPrice.currencyCode,
-                      )}
-                </p>
+                <div className="flex items-baseline gap-3">
+                  <p className="mt-4 text-2xl font-medium text-primary">
+                    {variant
+                      ? formatPrice(variant.price.amount, variant.price.currencyCode)
+                      : formatPrice(
+                          node.priceRange.minVariantPrice.amount,
+                          node.priceRange.minVariantPrice.currencyCode,
+                        )}
+                  </p>
+                  <p className="mt-4 text-sm text-muted-foreground line-through">
+                    {variant
+                      ? formatPrice((parseFloat(variant.price.amount) * 1.6).toFixed(2), variant.price.currencyCode)
+                      : formatPrice(
+                          (parseFloat(node.priceRange.minVariantPrice.amount) * 1.6).toFixed(2),
+                          node.priceRange.minVariantPrice.currencyCode,
+                        )}
+                  </p>
+                  <span className="mt-4 rounded-full bg-rose-500 px-2 py-0.5 text-xs font-bold text-white">
+                    -60%
+                  </span>
+                </div>
 
                 <p className="mt-6 whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
                   {node.description}
