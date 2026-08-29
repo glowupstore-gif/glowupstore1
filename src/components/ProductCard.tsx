@@ -85,9 +85,11 @@ export function ProductCard({ product, badgeType }: { product: ShopifyProduct; b
         <span className={`absolute left-2 top-2 rounded-full ${getBadgeColor(badgeType)} px-2 py-0.5 text-[10px] font-bold text-white shadow-md`}>
           {getBadgeLabel(badgeType)}
         </span>
-        <span className="absolute right-2 top-2 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-          -{discountPct}%
-        </span>
+        {hasShopifyDiscount && (
+          <span className="absolute right-2 top-2 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
+            -{discountPct}%
+          </span>
+        )}
       </Link>
 
       <div className="flex flex-1 flex-col p-3">

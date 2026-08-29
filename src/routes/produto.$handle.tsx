@@ -143,14 +143,14 @@ function ProductPage() {
                     const currentPrice = variant
                       ? parseFloat(variant.price.amount)
                       : parseFloat(node.priceRange.minVariantPrice.amount);
-                    const originalAmount = compareAt && parseFloat(compareAt.amount) > currentPrice
-                      ? parseFloat(compareAt.amount)
-                      : currentPrice * 1.6;
+                    const hasDiscount = compareAt && parseFloat(compareAt.amount) > currentPrice;
+                    if (!hasDiscount) return null;
+                    const originalAmount = parseFloat(compareAt.amount);
                     const discountPct = Math.round(((originalAmount - currentPrice) / originalAmount) * 100);
                     return (
                       <>
                         <p className="mt-4 text-base font-medium text-red-400 line-through decoration-2">
-                          {formatPrice(originalAmount.toFixed(2), variant?.price.currencyCode ?? node.priceRange.minVariantPrice.currencyCode)}
+                          {formatPrice(compareAt.amount, compareAt.currencyCode)}
                         </p>
                         <span className="mt-4 rounded-full bg-rose-500 px-2 py-0.5 text-xs font-bold text-white">
                           -{discountPct}%

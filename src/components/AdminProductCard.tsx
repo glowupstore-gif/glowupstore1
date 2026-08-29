@@ -41,9 +41,11 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
             {BADGE_OPTIONS.find((b) => b.value === product.badge)?.emoji} {BADGE_OPTIONS.find((b) => b.value === product.badge)?.label}
           </span>
         )}
-        <span className="absolute right-2 top-2 z-10 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-          {hasDiscount ? `-${discountPct}%` : "-60%"}
-        </span>
+        {hasDiscount && (
+          <span className="absolute right-2 top-2 z-10 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
+            -{discountPct}%
+          </span>
+        )}
         {product.image ? (
           <img
             src={product.image}
