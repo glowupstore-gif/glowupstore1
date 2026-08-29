@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
 import { Loader2, Pencil, Plus, Trash2, Upload, X } from "lucide-react";
-import { useAdminStore, type AdminProduct } from "@/stores/adminStore";
+import { useAdminStore, type AdminProduct, type ProductBadge, BADGE_OPTIONS } from "@/stores/adminStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,6 +22,7 @@ const EMPTY: Omit<AdminProduct, "id" | "createdAt"> = {
   available: true,
   featured: false,
   buyLink: "",
+  badge: null,
 };
 
 function AdminProdutos() {
@@ -260,6 +261,21 @@ function AdminProdutos() {
                     {CATEGORIES.map((c) => (
                       <option key={c.query} value={c.query}>
                         {c.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="badge">Tag do produto</Label>
+                  <select
+                    id="badge"
+                    value={form.badge ?? ""}
+                    onChange={(e) => setForm((f) => ({ ...f, badge: (e.target.value || null) as ProductBadge }))}
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  >
+                    {BADGE_OPTIONS.map((opt) => (
+                      <option key={opt.value ?? ""} value={opt.value ?? ""}>
+                        {opt.emoji} {opt.label}
                       </option>
                     ))}
                   </select>

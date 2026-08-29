@@ -2,6 +2,16 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { fetchProductsGitHub, saveProductsGitHub } from "@/lib/github-products";
 
+export type ProductBadge = "mais-vendido" | "oferta" | "novidade" | "destaque" | null;
+
+export const BADGE_OPTIONS: { value: ProductBadge; label: string; emoji: string }[] = [
+  { value: "mais-vendido", label: "Mais vendido", emoji: "🏆" },
+  { value: "oferta", label: "Oferta especial", emoji: "🔥" },
+  { value: "novidade", label: "Novidade", emoji: "✨" },
+  { value: "destaque", label: "Destaque glow up", emoji: "💞" },
+  { value: null, label: "Nenhum", emoji: "" },
+];
+
 export interface AdminProduct {
   id: string;
   title: string;
@@ -12,6 +22,7 @@ export interface AdminProduct {
   available: boolean;
   featured: boolean;
   buyLink: string;
+  badge: ProductBadge;
   createdAt: number;
 }
 

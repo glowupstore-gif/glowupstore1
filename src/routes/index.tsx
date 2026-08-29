@@ -430,7 +430,7 @@ function Home() {
                   className="animate-fade-in-up"
                   style={{ animationDelay: `${Math.min(i * 80, 400)}ms` }}
                 >
-                  <AdminProductCard product={product} badgeType="destaque" />
+                  <AdminProductCard product={product} />
                 </div>
               ))}
             </div>
@@ -480,6 +480,7 @@ function Home() {
                 id: product.node.id,
                 type: "shopify" as const,
                 product,
+                badge: null as "mais-vendido" | "oferta" | "novidade" | "destaque" | null,
               }));
               const adminCategoryProducts = adminProducts
                 .filter((p) => p.available)
@@ -488,6 +489,7 @@ function Home() {
                   id: product.id,
                   type: "admin" as const,
                   product,
+                  badge: product.badge,
                 }));
               const allProducts = [...shopifyProducts, ...adminCategoryProducts];
               const totalPages = Math.ceil(allProducts.length / ITEMS_PER_ROW);
@@ -527,9 +529,9 @@ function Home() {
                         style={{ animationDelay: `${Math.min(i * 80, 400)}ms` }}
                       >
                         {item.type === "shopify" ? (
-                          <ProductCard product={item.product} badgeType="oferta" />
+                          <ProductCard product={item.product} badgeType={item.badge ?? "destaque"} />
                         ) : (
-                          <AdminProductCard product={item.product} badgeType="oferta" />
+                          <AdminProductCard product={item.product} />
                         )}
                       </div>
                     ))}
