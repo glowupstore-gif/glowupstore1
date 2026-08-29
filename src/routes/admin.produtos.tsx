@@ -17,6 +17,7 @@ const EMPTY: Omit<AdminProduct, "id" | "createdAt"> = {
   title: "",
   description: "",
   price: "",
+  originalPrice: "",
   image: "",
   category: "",
   available: true,
@@ -240,7 +241,17 @@ function AdminProdutos() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="price">Preco (R$) *</Label>
+                  <Label htmlFor="originalPrice">Valor original (R$) *</Label>
+                  <Input
+                    id="originalPrice"
+                    value={form.originalPrice}
+                    onChange={(e) => setForm((f) => ({ ...f, originalPrice: e.target.value }))}
+                    placeholder="0,00"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="price">Valor com desconto (R$) *</Label>
                   <Input
                     id="price"
                     value={form.price}
@@ -248,6 +259,19 @@ function AdminProdutos() {
                     placeholder="0,00"
                     required
                   />
+                  {form.originalPrice && form.price && (
+                    <p className="text-xs text-green-600 font-medium">
+                      {(() => {
+                        const orig = parseFloat(form.originalPrice.replace(/[^\d.,]/g, "").replace(",", "."));
+                        const desc = parseFloat(form.price.replace(/[^\d.,]/g, "").replace(",", "."));
+                        if (orig > 0 && desc > 0 && desc < orig) {
+                          const pct = Math.round(((orig - desc) / orig) * 100);
+                          return `Desconto de ${pct}%`;
+                        }
+                        return null;
+                      })()}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="cat">Categoria</Label>
@@ -283,7 +307,7 @@ function AdminProdutos() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="buyLink">Link de compra (redireciona ao clicar em Comprar)</Label>
+                <Label htmlFor="buyLink">Link de compra (redireciona ao clicar em "Quero o meu")</Label>
                 <Input
                   id="buyLink"
                   value={form.buyLink}

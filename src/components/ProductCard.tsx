@@ -14,7 +14,14 @@ export function ProductCard({ product, badgeType }: { product: ShopifyProduct; b
   const selectedVariant = node.variants.edges[0]?.node;
   const image = node.images.edges[0]?.node;
   const price = node.priceRange.minVariantPrice;
-  const originalPrice = (parseFloat(price.amount) * 1.6).toFixed(2);
+  const compareAt = node.compareAtPriceRange?.minVariantPrice;
+  const hasShopifyDiscount = compareAt && parseFloat(compareAt.amount) > parseFloat(price.amount);
+  const originalPrice = hasShopifyDiscount
+    ? compareAt.amount
+    : (parseFloat(price.amount) * 1.6).toFixed(2);
+  const discountPct = hasShopifyDiscount
+    ? Math.round(((parseFloat(compareAt.amount) - parseFloat(price.amount)) / parseFloat(compareAt.amount)) * 100)
+    : 60;
 
   const reviews = Math.floor(Math.random() * 500) + 50;
 
@@ -55,10 +62,10 @@ export function ProductCard({ product, badgeType }: { product: ShopifyProduct; b
         )}
 
         <span className="absolute left-2 top-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-          {badgeType === "oferta" ? "🏷️ Oferta" : "🔥 Mais vendido"}
+          {badgeType === "oferta" ? "🏷️ Oferta" : badgeType === "mais-vendido" ? "🏆 Mais vendido" : badgeType === "novidade" ? "✨ Novidade" : badgeType === "destaque" ? "💞 Destaque" : "🔥 Oferta"}
         </span>
         <span className="absolute right-2 top-2 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-          -60%
+          -{discountPct}%
         </span>
       </Link>
 

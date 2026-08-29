@@ -138,17 +138,26 @@ function ProductPage() {
                           node.priceRange.minVariantPrice.currencyCode,
                         )}
                   </p>
-                  <p className="mt-4 text-base font-medium text-red-400 line-through decoration-2">
-                    {variant
-                      ? formatPrice((parseFloat(variant.price.amount) * 1.6).toFixed(2), variant.price.currencyCode)
-                      : formatPrice(
-                          (parseFloat(node.priceRange.minVariantPrice.amount) * 1.6).toFixed(2),
-                          node.priceRange.minVariantPrice.currencyCode,
-                        )}
-                  </p>
-                  <span className="mt-4 rounded-full bg-rose-500 px-2 py-0.5 text-xs font-bold text-white">
-                    -60%
-                  </span>
+                  {(() => {
+                    const compareAt = node.compareAtPriceRange?.minVariantPrice;
+                    const currentPrice = variant
+                      ? parseFloat(variant.price.amount)
+                      : parseFloat(node.priceRange.minVariantPrice.amount);
+                    const originalAmount = compareAt && parseFloat(compareAt.amount) > currentPrice
+                      ? parseFloat(compareAt.amount)
+                      : currentPrice * 1.6;
+                    const discountPct = Math.round(((originalAmount - currentPrice) / originalAmount) * 100);
+                    return (
+                      <>
+                        <p className="mt-4 text-base font-medium text-red-400 line-through decoration-2">
+                          {formatPrice(originalAmount.toFixed(2), variant?.price.currencyCode ?? node.priceRange.minVariantPrice.currencyCode)}
+                        </p>
+                        <span className="mt-4 rounded-full bg-rose-500 px-2 py-0.5 text-xs font-bold text-white">
+                          -{discountPct}%
+                        </span>
+                      </>
+                    );
+                  })()}
                 </div>
 
                 <p className="mt-6 whitespace-pre-line text-sm leading-relaxed text-muted-foreground">

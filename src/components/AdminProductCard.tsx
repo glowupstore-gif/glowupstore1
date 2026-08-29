@@ -14,8 +14,11 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
     return num.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   };
 
-  const priceNum = parsePrice(product.price);
-  const originalPrice = (priceNum * 1.6).toFixed(2).replace(".", ",");
+  const hasDiscount = product.originalPrice && product.price &&
+    parsePrice(product.originalPrice) > parsePrice(product.price);
+  const discountPct = hasDiscount
+    ? Math.round(((parsePrice(product.originalPrice) - parsePrice(product.price)) / parsePrice(product.originalPrice)) * 100)
+    : 0;
 
   const buyHref = product.buyLink || whatsappLink(`Oi! Tenho interesse no produto "${product.title}"`);
   const reviews = Math.floor(Math.random() * 500) + 50;
@@ -29,7 +32,7 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
           </span>
         )}
         <span className="absolute right-2 top-2 z-10 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-          -60%
+          {hasDiscount ? `-${discountPct}%` : "-60%"}
         </span>
         {product.image ? (
           <img
@@ -64,9 +67,11 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
           <span className="text-base font-bold text-primary">
             {formatPrice(product.price)}
           </span>
-          <span className="text-sm font-medium text-red-400 line-through decoration-2">
-            R$ {originalPrice}
-          </span>
+          {hasDiscount && (
+            <span className="text-sm font-medium text-red-400 line-through decoration-2">
+              {formatPrice(product.originalPrice)}
+            </span>
+          )}
         </div>
 
         <div className="mt-auto pt-3">

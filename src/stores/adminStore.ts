@@ -17,6 +17,7 @@ export interface AdminProduct {
   title: string;
   description: string;
   price: string;
+  originalPrice: string;
   image: string;
   category: string;
   available: boolean;
