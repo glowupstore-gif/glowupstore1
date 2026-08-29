@@ -1,7 +1,17 @@
 import { ShoppingBag, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { whatsappLink } from "@/lib/site";
-import { type AdminProduct, BADGE_OPTIONS } from "@/stores/adminStore";
+import { type AdminProduct, BADGE_OPTIONS, type ProductBadge } from "@/stores/adminStore";
+
+function getBadgeColor(badge: ProductBadge): string {
+  switch (badge) {
+    case "mais-vendido": return "bg-gradient-to-r from-yellow-500 to-amber-500";
+    case "oferta": return "bg-gradient-to-r from-orange-500 to-red-500";
+    case "novidade": return "bg-gradient-to-r from-cyan-500 to-blue-500";
+    case "destaque": return "bg-gradient-to-r from-pink-500 to-rose-500";
+    default: return "bg-gradient-to-r from-orange-500 to-red-500";
+  }
+}
 
 export function AdminProductCard({ product }: { product: AdminProduct }) {
   const parsePrice = (val: string) => {
@@ -27,7 +37,7 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
     <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1">
       <div className="relative block aspect-[4/5] overflow-hidden bg-secondary">
         {product.badge && (
-          <span className="absolute left-2 top-2 z-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
+          <span className={`absolute left-2 top-2 z-10 rounded-full ${getBadgeColor(product.badge)} px-2 py-0.5 text-[10px] font-bold text-white shadow-md`}>
             {BADGE_OPTIONS.find((b) => b.value === product.badge)?.emoji} {BADGE_OPTIONS.find((b) => b.value === product.badge)?.label}
           </span>
         )}

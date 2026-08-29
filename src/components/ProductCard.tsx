@@ -5,8 +5,29 @@ import { formatPrice, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { whatsappLink } from "@/lib/site";
 import { toast } from "sonner";
+import { type ProductBadge } from "@/stores/adminStore";
 
-export function ProductCard({ product, badgeType }: { product: ShopifyProduct; badgeType?: "destaque" | "oferta" }) {
+function getBadgeColor(badge: ProductBadge): string {
+  switch (badge) {
+    case "mais-vendido": return "bg-gradient-to-r from-yellow-500 to-amber-500";
+    case "oferta": return "bg-gradient-to-r from-orange-500 to-red-500";
+    case "novidade": return "bg-gradient-to-r from-cyan-500 to-blue-500";
+    case "destaque": return "bg-gradient-to-r from-pink-500 to-rose-500";
+    default: return "bg-gradient-to-r from-orange-500 to-red-500";
+  }
+}
+
+function getBadgeLabel(badge: ProductBadge): string {
+  switch (badge) {
+    case "mais-vendido": return "🏆 Mais vendido";
+    case "oferta": return "🔥 Oferta especial";
+    case "novidade": return "✨ Novidade";
+    case "destaque": return "💞 Destaque glow up";
+    default: return "🔥 Oferta";
+  }
+}
+
+export function ProductCard({ product, badgeType }: { product: ShopifyProduct; badgeType?: ProductBadge }) {
   const addItem = useCartStore((state) => state.addItem);
   const isLoading = useCartStore((state) => state.isLoading);
 
@@ -61,8 +82,8 @@ export function ProductCard({ product, badgeType }: { product: ShopifyProduct; b
           </div>
         )}
 
-        <span className="absolute left-2 top-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
-          {badgeType === "oferta" ? "🏷️ Oferta" : badgeType === "mais-vendido" ? "🏆 Mais vendido" : badgeType === "novidade" ? "✨ Novidade" : badgeType === "destaque" ? "💞 Destaque" : "🔥 Oferta"}
+        <span className={`absolute left-2 top-2 rounded-full ${getBadgeColor(badgeType)} px-2 py-0.5 text-[10px] font-bold text-white shadow-md`}>
+          {getBadgeLabel(badgeType)}
         </span>
         <span className="absolute right-2 top-2 rounded-full bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-md">
           -{discountPct}%
