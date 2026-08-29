@@ -96,7 +96,7 @@ export function AdminProductCard({ product }: { product: AdminProduct }) {
               Quero o meu
             </a>
           </Button>
-          <p className="mt-1.5 text-center text-[10px] text-muted-foreground">🔒 Compra segura</p>
+          <p className="mt-1.5 text-center text-[10px] text-muted-foreground">Compra segura</p>
         </div>
       </div>
     </article>
